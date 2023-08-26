@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:anonymous_question/screens/next_page.dart'; // Add this line
+import 'package:anonymous_question/screens/host_page.dart';
+import 'package:anonymous_question/screens/guest_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,10 +35,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
+  // ホスト画面への遷移
+  void _hostScreenTransition() {
     setState(() {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const NextPage()));
+          .push(MaterialPageRoute(builder: (context) => const HostPage()));
+    });
+  }
+
+  void _guestScreenTransition() {
+    setState(() {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const GuestPage()));
     });
   }
 
@@ -53,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
             GestureDetector(
               child: Material(
                 elevation: 10,
+                color: Colors.transparent,
                 child: Container(
                   height: 150,
                   width: 150,
@@ -77,13 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const NextPage()));
+                _hostScreenTransition();
               },
             ),
             GestureDetector(
               child: Material(
                 elevation: 10,
+                color: Colors.transparent,
                 child: Container(
                   height: 150,
                   width: 150,
@@ -106,14 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const AlertDialog(
-                      title: Text('動作の確認'),
-                    );
-                  },
-                );
+                _guestScreenTransition();
               },
             ),
           ],
