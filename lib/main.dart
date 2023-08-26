@@ -15,11 +15,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-        backgroundColor: Color.fromARGB(255, 164, 94, 94),
-        centerTitle: true,
-        elevation: 0,
-      )),
+        fontFamily: 'ZenKurenaido',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 164, 94, 94),
+          centerTitle: true,
+          elevation: 0,
+        ),
+      ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -79,8 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         size: 100,
                       ),
                       Text(
-                        'ホスト',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        'Host',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       )
                     ],
                   ),
@@ -109,8 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.white,
                         size: 100,
                       ),
-                      Text('ゲスト',
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                      Text('Guest',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700)),
                     ],
                   ),
                 ),
