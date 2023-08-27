@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'ZenKurenaido',
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 164, 94, 94),
+          backgroundColor: Colors.white,
           centerTitle: true,
           elevation: 0,
         ),
@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // ゲスト画面への遷移
   void _guestScreenTransition() {
     setState(() {
       Navigator.of(context)

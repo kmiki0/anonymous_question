@@ -7,11 +7,22 @@ class GuestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(),
-      body: Center(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              // サーバーから切断
+              // channel.sink.close();
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Color.fromARGB(100, 0, 0, 0),
+            )),
+      ),
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [Text('GuestPage')],
+          children: [Text('GuestPage')],
         ),
       ),
     );
