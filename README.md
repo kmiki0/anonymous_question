@@ -19,3 +19,16 @@ A new Flutter project.
     5. 押下で、ルームのTokenと（ON・OFF）をサーバーに送信
     6. ホストにカウントアップ・ダウンして送信
 
+
+
+
+
+## テーブル構造
+- ルームテーブル
+    | name       |     type    | PRIMARY KEY |
+    |:-----------|:------------|:-----------:|
+    |id          | int         | ◯          |
+    |room_roken  | varchar     |             |
+    |room_name   | varchar     |             |
+
+- ルームテーブル

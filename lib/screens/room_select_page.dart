@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-class GuestPage extends StatelessWidget {
-  const GuestPage({Key? key}) : super(key: key);
+class RoomSelectPage extends StatefulWidget {
+  const RoomSelectPage({super.key});
 
+  @override
+  State<RoomSelectPage> createState() => _RoomSettingState();
+}
+
+class _RoomSettingState extends State<RoomSelectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

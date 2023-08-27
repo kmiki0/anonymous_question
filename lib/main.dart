@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:anonymous_question/screens/room_setting_page.dart';
-import 'package:anonymous_question/screens/guest_page.dart';
+import 'package:anonymous_question/screens/room_select_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // ゲスト画面への遷移
   void _guestScreenTransition() {
     setState(() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const GuestPage()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const RoomSelectPage()));
     });
   }
 
@@ -59,74 +59,81 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            GestureDetector(
-              child: Material(
-                elevation: 10,
-                color: Colors.transparent,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_home_rounded,
-                        color: Colors.white,
-                        size: 100,
+            const Text('匿名質問箱', style: TextStyle(fontSize: 30)),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  child: Material(
+                    elevation: 10,
+                    color: Colors.transparent,
+                    child: Container(
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      Text(
-                        'Host',
-                        style: TextStyle(
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_home_rounded,
                             color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              onTap: () {
-                _hostScreenTransition();
-              },
-            ),
-            GestureDetector(
-              child: Material(
-                elevation: 10,
-                color: Colors.transparent,
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.accessibility_new_outlined,
-                        color: Colors.white,
-                        size: 100,
+                            size: 100,
+                          ),
+                          Text(
+                            'Host',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          )
+                        ],
                       ),
-                      Text('Guest',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700)),
-                    ],
+                    ),
                   ),
+                  onTap: () {
+                    _hostScreenTransition();
+                  },
                 ),
-              ),
-              onTap: () {
-                _guestScreenTransition();
-              },
+                GestureDetector(
+                  child: Material(
+                    elevation: 10,
+                    color: Colors.transparent,
+                    child: Container(
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.accessibility_new_outlined,
+                            color: Colors.white,
+                            size: 100,
+                          ),
+                          Text('Guest',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    _guestScreenTransition();
+                  },
+                ),
+              ],
             ),
           ],
         ),
