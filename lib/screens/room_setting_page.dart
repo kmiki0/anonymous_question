@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class HostPage extends StatefulWidget {
-  const HostPage({super.key});
+class RoomSettingPage extends StatefulWidget {
+  const RoomSettingPage({super.key});
 
   @override
-  State<HostPage> createState() => _HostPageState();
+  State<RoomSettingPage> createState() => _RoomSettingState();
 }
 
-class _HostPageState extends State<HostPage> {
+class _RoomSettingState extends State<RoomSettingPage> {
   List<String> messages = [];
   late WebSocketChannel channel;
 

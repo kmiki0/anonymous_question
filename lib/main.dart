@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:anonymous_question/screens/host_page.dart';
+import 'package:anonymous_question/screens/room_setting_page.dart';
 import 'package:anonymous_question/screens/guest_page.dart';
 
 void main() {
@@ -40,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // ホスト画面への遷移
   void _hostScreenTransition() {
     setState(() {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const HostPage()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const RoomSettingPage()));
     });
   }
 
