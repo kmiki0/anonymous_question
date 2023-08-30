@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class RoomSettingPage extends StatefulWidget {
   const RoomSettingPage({super.key});
@@ -9,41 +8,17 @@ class RoomSettingPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSettingPage> {
-  List<String> messages = [];
-  late WebSocketChannel channel;
-
-  @override
-  void initState() {
-    super.initState();
-    // サーバーに接続
-    channel = WebSocketChannel.connect(
-      Uri.parse('ws://ik1-218-79096.vs.sakura.ne.jp:5000'),
-    );
-    channel.stream.listen((message) {
-      // setState(() {
-      print('受信メッセージ : $message');
-      // });
-    });
-  }
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-
-    // メッセージ 送信
-    void sendMessage() {
-      if (controller.text.isNotEmpty) {
-        channel.sink.add(controller.text);
-      }
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
               // サーバーから切断
-              channel.sink.close();
+              // channel.sink.close();
               Navigator.of(context).pop();
             },
             icon: const Icon(
@@ -63,7 +38,7 @@ class _RoomSettingState extends State<RoomSettingPage> {
               width: 300,
               child: TextFormField(
                 textInputAction: TextInputAction.done,
-                controller: controller,
+                controller: _controller,
                 validator: (String? value) {
                   return null;
                 },
@@ -78,7 +53,6 @@ class _RoomSettingState extends State<RoomSettingPage> {
             GestureDetector(
               onTap: () {
                 // ルーム作成
-                // channel.sink.add('create');
               },
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -90,9 +64,8 @@ class _RoomSettingState extends State<RoomSettingPage> {
                 ),
                 onPressed: () {
                   // ルーム作成
-                  sendMessage();
                   // テキスト初期化
-                  controller.clear();
+                  _controller.clear();
                 },
                 child: const Text(
                   'Create',

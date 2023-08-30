@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+### SSH接続
+```
+ssh ubuntu@ik1-218-79096.vs.sakura.ne.jp -p 22
+```
+GYFW6raweqU.
+
 
 
 ## 通信方法
