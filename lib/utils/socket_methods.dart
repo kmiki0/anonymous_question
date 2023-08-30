@@ -6,7 +6,7 @@ import 'package:anonymous_question/utils/socket_client.dart';
 
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
-  bool _isPlaying = false;
+  // bool _isPlaying = false;
 
   // create game
   createGame(String nickname) {

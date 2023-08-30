@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:anonymous_question/utils/socket_methods.dart';
 
 class RoomSettingPage extends StatefulWidget {
   const RoomSettingPage({super.key});
@@ -8,6 +9,7 @@ class RoomSettingPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSettingPage> {
+  final SocketMethods _socketMethods = SocketMethods();
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -50,29 +52,27 @@ class _RoomSettingState extends State<RoomSettingPage> {
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: () {
+            ElevatedButton(
+              onPressed: () {
                 // ルーム作成
+                _socketMethods.createGame(
+                  _controller.text,
+                );
+                // テキスト初期化
+                _controller.clear();
               },
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                onPressed: () {
-                  // ルーム作成
-                  // テキスト初期化
-                  _controller.clear();
-                },
-                child: const Text(
-                  'Create',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
+              ),
+              child: const Text(
+                'Create',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

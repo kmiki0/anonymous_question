@@ -16,7 +16,6 @@ class _RoomSettingState extends State<RoomSelectPage> {
         leading: IconButton(
             onPressed: () {
               // サーバーから切断
-              // channel.sink.close();
               Navigator.of(context).pop();
             },
             icon: const Icon(

@@ -55,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(),
@@ -72,21 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 10,
                     color: Colors.transparent,
                     child: Container(
-                      height: 150,
-                      width: 150,
+                      height: mediaSize.height * 0.22,
+                      width: mediaSize.width * 0.365,
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.add_home_rounded,
                             color: Colors.white,
-                            size: 100,
+                            size: mediaSize.width / 4,
                           ),
-                          Text(
+                          const Text(
                             'Host',
                             style: TextStyle(
                                 color: Colors.white,
@@ -106,21 +108,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 10,
                     color: Colors.transparent,
                     child: Container(
-                      height: 150,
-                      width: 150,
+                      height: mediaSize.height * 0.22,
+                      width: mediaSize.width * 0.365,
                       decoration: BoxDecoration(
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.accessibility_new_outlined,
                             color: Colors.white,
-                            size: 100,
+                            size: mediaSize.width / 4,
                           ),
-                          Text('Guest',
+                          const Text('Guest',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
