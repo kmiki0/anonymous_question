@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:anonymous_question/data/server_data.dart';
+import 'package:anonymous_question/widgets/room_info.dart';
 
 class RoomSelectPage extends StatefulWidget {
   const RoomSelectPage({super.key});
@@ -8,6 +10,17 @@ class RoomSelectPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSelectPage> {
+  List<RoomInfo> roomList = new List<RoomInfo>.generate(
+    10,
+    (int index) => RoomInfo(
+      roomId: 'hKM7h0qA6Ftqpxda',
+      roomName: 'testRoom',
+      maxPlayers: '10',
+      isJoin: true,
+      timeStamp: DateTime.now(),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +36,14 @@ class _RoomSettingState extends State<RoomSelectPage> {
               color: Color.fromARGB(100, 0, 0, 0),
             )),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('GuestPage')],
-        ),
+      body: ListView.builder(
+        itemCount: roomList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return RoomInfoCard(
+            index: index + 1,
+            roomInfo: roomList[index],
+          );
+        },
       ),
     );
   }
