@@ -22,75 +22,73 @@ class RoomInfoCard extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(5),
-      padding: const EdgeInsets.all(5),
       height: cardHeight,
-      child: GestureDetector(
-        onTap: () {
-          // 選択したルームへ接続
-        },
-        child: Material(
-          elevation: 4,
-          color: const Color.fromARGB(0, 120, 120, 120),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              // 左右に余白
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+      child: Material(
+        type: MaterialType.button,
+        color: Colors.white,
+        shadowColor: Colors.black,
+        elevation: 5,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          onTap: () {
+            // 選択したルームへ接続
+          },
+          borderRadius: BorderRadius.circular(10),
+          child: Padding(
+            // 左右に余白
+            padding: const EdgeInsets.only(top: 5, left: 15, right: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$index. ',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      roomInfo.roomName,
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'Created: ',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      DateFormat('yyyy/MM/dd(E) HH:mm')
+                          .format(roomInfo.timeStamp),
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                // 11人以上の場合は、アイコンの表示を2行にする
+                if (playerCount > 10)
+                  Column(
                     children: [
-                      Text(
-                        '$index. ',
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        roomInfo.roomName,
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
+                      const IconDisplay(count: 11),
+                      IconDisplay(count: playerCount - 11),
                     ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Created: ',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        DateFormat('yyyy/MM/dd(E) HH:mm')
-                            .format(roomInfo.timeStamp),
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // 11人以上の場合は、アイコンの表示を2行にする
-                  if (playerCount > 10)
-                    Column(
-                      children: [
-                        const IconDisplay(count: 11),
-                        IconDisplay(count: playerCount - 11),
-                      ],
-                    )
-                  else
-                    IconDisplay(count: playerCount)
-                ],
-              ),
+                  )
+                else
+                  IconDisplay(count: playerCount)
+              ],
             ),
           ),
         ),
