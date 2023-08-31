@@ -1,7 +1,7 @@
 class RoomInfo {
   final String roomId;
   final String roomName;
-  final String maxPlayers;
+  final List<PlayerInfo> playerList;
   final bool isJoin;
   final DateTime timeStamp;
   //DateTime.parse(dateString)
@@ -9,8 +9,20 @@ class RoomInfo {
   const RoomInfo({
     required this.roomId,
     required this.roomName,
-    required this.maxPlayers,
+    required this.playerList,
     required this.isJoin,
     required this.timeStamp,
+  });
+}
+
+class PlayerInfo {
+  final String playerId;
+  final bool onOff;
+  final bool isMaster;
+
+  const PlayerInfo({
+    required this.playerId,
+    required this.onOff,
+    required this.isMaster,
   });
 }

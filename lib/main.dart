@@ -55,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // 画面サイズ取得
     final mediaSize = MediaQuery.of(context).size;
 
     return Scaffold(
