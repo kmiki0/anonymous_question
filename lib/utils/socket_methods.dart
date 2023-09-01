@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:anonymous_question/utils/socket_client.dart';
+import 'package:anonymous_question/main.dart';
 // import 'package:provider/provider.dart';
 // import 'package:typeracer_tutorial/providers/client_state_provider.dart';
 // import 'package:typeracer_tutorial/providers/game_state_provider.dart';
@@ -17,12 +18,11 @@ class SocketMethods {
     }
   }
 
-  // join game
-  joinGame(String gameId, String nickname) {
-    if (nickname.isNotEmpty && gameId.isNotEmpty) {
+  // ルームへ接続
+  joinGame(String roomId) {
+    if (roomId.isNotEmpty) {
       _socketClient.emit('join-game', {
-        'nickname': nickname,
-        'gameId': gameId,
+        'roomId': roomId,
       });
     }
   }
@@ -36,17 +36,19 @@ class SocketMethods {
   }
 
   // listeners
+  // サーバー接続時に、playerIdを取得
+  setPlayerIdListener(BuildContext context) {
+    _socketClient.on('setPlayerId', (playerId) {
+      if (playerId.isNotEmpty) {
+        SocketManager.instance.playerId = playerId;
+        print(SocketManager.instance.playerId);
+      }
+    });
+  }
+
+
   // updateGameListener(BuildContext context) {
   //   _socketClient.on('updateGame', (data) {
-  //     final gameStateProvider =
-  //         Provider.of<GameStateProvider>(context, listen: false)
-  //             .updateGameState(
-  //       id: data['_id'],
-  //       players: data['players'],
-  //       isJoin: data['isJoin'],
-  //       words: data['words'],
-  //       isOver: data['isOver'],
-  //     );
 
   //     if (data['_id'].isNotEmpty && !_isPlaying) {
   //       Navigator.pushNamed(context, '/game-screen');

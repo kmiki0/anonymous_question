@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:anonymous_question/data/server_data.dart';
+import 'package:anonymous_question/utils/socket_methods.dart';
 
 class RoomInfoCard extends StatelessWidget {
   final int index;
@@ -11,6 +12,7 @@ class RoomInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SocketMethods socketMethods = SocketMethods();
     int playerCount = roomInfo.playerList.length;
     final mediaSize = MediaQuery.of(context).size;
     double cardHeight = mediaSize.height / 6.6;
@@ -32,6 +34,7 @@ class RoomInfoCard extends StatelessWidget {
         child: InkWell(
           onTap: () {
             // 選択したルームへ接続
+            socketMethods.joinGame(roomInfo.roomId);
           },
           borderRadius: BorderRadius.circular(10),
           child: Padding(

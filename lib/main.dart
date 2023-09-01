@@ -27,6 +27,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// 通信用のクラス
+class SocketManager {
+  SocketManager._();
+  static final instance = SocketManager._();
+  String playerId = '';
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 

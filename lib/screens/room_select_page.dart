@@ -1,10 +1,14 @@
 import 'dart:convert';
-
+import 'package:anonymous_question/screens/on_off_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:anonymous_question/data/server_data.dart';
 import 'package:anonymous_question/widgets/room_info.dart';
+import 'package:anonymous_question/utils/socket_client.dart';
+import 'package:anonymous_question/utils/socket_methods.dart';
 import 'package:anonymous_question/consts/setting.dart';
+import 'package:anonymous_question/main.dart';
+
 
 class RoomSelectPage extends StatefulWidget {
   const RoomSelectPage({super.key});
@@ -14,34 +18,30 @@ class RoomSelectPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSelectPage> {
-  // List<RoomInfo> roomList = List<RoomInfo>.generate(
-  //   10,
-  //   (int index) => RoomInfo(
-  //     roomId: 'hKM7h0qA6Ftqpxda',
-  //     roomName: 'テストのルーム',
-  //     isJoin: true,
-  //     timeStamp: DateTime.now(),
-  //     playerList: const [
-  //       PlayerInfo(playerId: 'aaa', onOff: true, isMaster: true),
-  //       PlayerInfo(playerId: 'bbb', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //       PlayerInfo(playerId: 'ccc', onOff: true, isMaster: false),
-  //     ],
-  //   ),
-  // );
+  final _socketClient = SocketClient.instance.socket!;
+  final SocketMethods _socketMethods = SocketMethods();
+
+  @override
+  void initState() {
+    super.initState();
+    // サーバー接続時、playerIdを取得
+    _socketMethods.setPlayerIdListener(context);
+    // ルームへ接続した際に、自分がルームへ参加したかどうかを取得
+    isRoomJoinListener(context);
+  }
+
+  // ONOFF画面への遷移
+  void _onOffScreenTransition() {
+    setState(() {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const OnOffPage()));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(SocketManager.instance.playerId);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -80,9 +80,20 @@ class _RoomSettingState extends State<RoomSelectPage> {
     );
   }
 
+  // 画面遷移するため、ここに記載
+  isRoomJoinListener(BuildContext context) {
+    _socketClient.on('isRoomJoin', (playerId) {
+      print('isRoomJoin: $playerId');
+      print('SocketManager.instance.playerId: ${SocketManager.instance.playerId}');
+      // ルームへ参加したplayerIdが自分と同じなら、画面遷移
+      if (playerId == SocketManager.instance.playerId) {
+        _onOffScreenTransition();
+      }
+    });
+  }
   // HomeFeedのデータを取得 引数はisRefresh
   Future<List<RoomInfo>> _fetchRoomList() async {
-    final urlParam = '${URL.apiServer}/getRoomList';
+    const urlParam = '${URL.apiServer}/getRoomList';
     // データを取得
     final response = await http.get(Uri.parse(urlParam));
 

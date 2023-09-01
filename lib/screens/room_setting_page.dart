@@ -13,6 +13,13 @@ class _RoomSettingState extends State<RoomSettingPage> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // サーバー接続時、playerIdを取得
+    _socketMethods.setPlayerIdListener(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
