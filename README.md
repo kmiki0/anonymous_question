@@ -6,7 +6,6 @@ A new Flutter project.
 ```
 ssh ubuntu@ik1-218-79096.vs.sakura.ne.jp -p 22
 ```
-GYFW6raweqU.
 
 
 
