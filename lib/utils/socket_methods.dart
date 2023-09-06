@@ -41,7 +41,6 @@ class SocketMethods {
     _socketClient.on('setPlayerId', (playerId) {
       if (playerId.isNotEmpty) {
         SocketManager.instance.playerId = playerId;
-        print(SocketManager.instance.playerId);
       }
     });
   }
