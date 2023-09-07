@@ -1,5 +1,10 @@
+import 'package:anonymous_question/main.dart';
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 import 'package:anonymous_question/utils/socket_methods.dart';
+
+import '../consts/setting.dart';
+
 
 class RoomSettingPage extends StatefulWidget {
   const RoomSettingPage({super.key});
@@ -9,12 +14,26 @@ class RoomSettingPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSettingPage> {
+  late final Socket _socket;
   final SocketMethods _socketMethods = SocketMethods();
   final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+      // PlayerIdが空の場合、サーバーに接続
+    if (SocketManager.instance.playerId.isEmpty) {
+      _socket = io(
+        URL.apiServer,
+        OptionBuilder()
+            .setTransports(['websocket'])
+            .enableAutoConnect()
+            .build()
+      );
+
+      // WebSocketに接続
+      _socket.connect();
+    }
     // サーバー接続時、playerIdを取得
     _socketMethods.setPlayerIdListener(context);
   }
@@ -27,7 +46,7 @@ class _RoomSettingState extends State<RoomSettingPage> {
         leading: IconButton(
             onPressed: () {
               // サーバーから切断
-              // channel.sink.close();
+              _socketMethods.disconnect();
               Navigator.of(context).pop();
             },
             icon: const Icon(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:anonymous_question/utils/socket_client.dart';
 import 'package:anonymous_question/main.dart';
+import 'package:anonymous_question/consts/setting.dart';
+import 'package:http/http.dart' as http;
 // import 'package:provider/provider.dart';
 // import 'package:typeracer_tutorial/providers/client_state_provider.dart';
 // import 'package:typeracer_tutorial/providers/game_state_provider.dart';
@@ -8,6 +10,11 @@ import 'package:anonymous_question/main.dart';
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
   // bool _isPlaying = false;
+
+  // サーバーに接続
+  connect() async {
+    await http.get(Uri.parse('${URL.apiServer}/connect'));
+  }
 
   // create game
   createGame(String nickname) {
@@ -35,6 +42,17 @@ class SocketMethods {
     });
   }
 
+  // ルームから退出
+  leaveRoom() {
+    _socketClient.emit('leave-room');
+  }
+
+  // サーバーから切断
+  disconnect() {
+    // SocketId を空にする
+    SocketManager.instance.playerId = '';
+    _socketClient.emit('disconnect-request');
+  }
   // listeners
   // サーバー接続時に、playerIdを取得
   setPlayerIdListener(BuildContext context) {

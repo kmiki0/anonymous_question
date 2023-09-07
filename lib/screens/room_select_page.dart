@@ -8,6 +8,8 @@ import 'package:anonymous_question/utils/socket_client.dart';
 import 'package:anonymous_question/utils/socket_methods.dart';
 import 'package:anonymous_question/consts/setting.dart';
 import 'package:anonymous_question/main.dart';
+import 'package:socket_io_client/socket_io_client.dart';
+
 
 
 class RoomSelectPage extends StatefulWidget {
@@ -18,12 +20,28 @@ class RoomSelectPage extends StatefulWidget {
 }
 
 class _RoomSettingState extends State<RoomSelectPage> {
+  late final Socket _socket;
   final _socketClient = SocketClient.instance.socket!;
   final SocketMethods _socketMethods = SocketMethods();
 
   @override
   void initState() {
     super.initState();
+    
+    // PlayerIdが空の場合、サーバーに接続
+    if (SocketManager.instance.playerId.isEmpty) {
+      _socket = io(
+        URL.apiServer,
+        OptionBuilder()
+            .setTransports(['websocket'])
+            .enableAutoConnect()
+            .build()
+      );
+
+      // WebSocketに接続
+      _socket.connect();
+    }
+
     // サーバー接続時、playerIdを取得
     _socketMethods.setPlayerIdListener(context);
     // ルームへ接続した際に、自分がルームへ参加したかどうかを取得
@@ -47,6 +65,7 @@ class _RoomSettingState extends State<RoomSelectPage> {
         leading: IconButton(
             onPressed: () {
               // サーバーから切断
+              _socketMethods.disconnect();
               Navigator.of(context).pop();
             },
             icon: const Icon(
