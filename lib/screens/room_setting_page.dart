@@ -2,6 +2,7 @@ import 'package:anonymous_question/main.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:anonymous_question/utils/socket_methods.dart';
+import 'package:anonymous_question/screens/on_off_page.dart';
 
 import '../consts/setting.dart';
 
@@ -37,6 +38,15 @@ class _RoomSettingState extends State<RoomSettingPage> {
     // サーバー接続時、playerIdを取得
     _socketMethods.setPlayerIdListener(context);
   }
+
+  // ONOFF画面への遷移
+  void _onOffScreenTransition() {
+    setState(() {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const OnOffPage()));
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +96,8 @@ class _RoomSettingState extends State<RoomSettingPage> {
                 );
                 // テキスト初期化
                 _controller.clear();
+                // ONOFF画面へ遷移
+                _onOffScreenTransition();
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.add_home_rounded,
+                            Icons.home,
                             color: Colors.white,
                             size: mediaSize.width / 4,
                           ),
@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.accessibility_new_outlined,
+                            Icons.person_add_alt_1,
                             color: Colors.white,
                             size: mediaSize.width / 4,
                           ),

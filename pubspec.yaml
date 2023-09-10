@@ -39,6 +39,7 @@ dependencies:
   socket_io_client: ^2.0.3+1
   intl: ^0.18.1
   http: ^1.1.0
+  flutter_speed_dial: ^7.0.0 
   soundpool: ^2.4.1
 
 dev_dependencies:
@@ -64,6 +65,11 @@ flutter:
       - asset: assets\fonts\ZenKurenaido-Regular.ttf
         weight: 400
 
+    - family: Toma Slab
+      fonts:
+      - asset: assets\fonts\TomaSlab-ExtraLight.ttf
+        weight: 200
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -74,6 +80,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/se/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
