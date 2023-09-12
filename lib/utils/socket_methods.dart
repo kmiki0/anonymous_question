@@ -63,6 +63,15 @@ class SocketMethods {
     });
   }
 
+  // サーバー接続時に、playerIdを取得
+  isPlayingListener(BuildContext context) {
+      _socketClient.on('isPlaying', (isPlaying) {
+          if (playerId.isNotEmpty) {
+              SocketManager.instance.isPlaying = isPlaying;
+          }
+      });
+  }
+
 
   // updateGameListener(BuildContext context) {
   //   _socketClient.on('updateGame', (data) {

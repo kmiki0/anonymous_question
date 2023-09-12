@@ -32,6 +32,14 @@ class _OnOffPageState extends State<OnOffPage> {
   bool isFrom = true;
 
   @override
+  void initState() {
+    super.initState();
+  
+    // スイッチ操作 切替イベント
+    _socketMethods.isPlayingListener(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
         // 画面サイズ取得
     final mediaSize = MediaQuery.of(context).size;
@@ -124,8 +132,11 @@ class _OnOffPageState extends State<OnOffPage> {
                           left: (mediaSize.width / 2.6).round().toDouble(),
                           child: GestureDetector(
                             onTap: () {
-                              _changeTop();
-                              // _socketMethods.sendData('on');
+                              // 押下可能の場合
+                              if (SocketManager.instance.isPlaying) {
+                                  _changeTop();
+                                  // _socketMethods.sendData('on');
+                              }
                             },
                             child: Container(
                               width: 100,

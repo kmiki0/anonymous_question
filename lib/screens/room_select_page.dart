@@ -101,7 +101,7 @@ class _RoomSettingState extends State<RoomSelectPage> {
   // 画面遷移するため、ここに記載
   isRoomJoinListener(BuildContext context) {
     _socketClient.on('isRoomJoin', (playerId) {
-      print('SocketManager.instance.playerId: ${SocketManager.instance.playerId}');
+      SocketManager.instance.roomId = roomId;
       // ルームへ参加したplayerIdが自分と同じなら、画面遷移
       if (playerId == SocketManager.instance.playerId) {
         _onOffScreenTransition();

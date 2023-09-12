@@ -32,6 +32,8 @@ class SocketManager {
   SocketManager._();
   static final instance = SocketManager._();
   String playerId = '';
+  String roomId = '';
+  bool isPlaying = false;
 }
 
 class MyHomePage extends StatefulWidget {
